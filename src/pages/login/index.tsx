@@ -4,14 +4,23 @@ import AuthenLayout from "../../components/authen-layout";
 import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/features/userSlice";
 function Login() {
-  const nav = useNavigate()
-  const handleLogin = async (values) => {
+  const dispatch = useDispatch();
+
+  const nav = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleLogin = async (values: any) => {
     try {
-      await api.post("login", values);
+      const respone = await api.post("login", values);
       toast.success("Login success");
-      nav("/")
-    } catch (error) {
+
+      //respone,data => user
+      dispatch(login(respone.data));
+      nav("/");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error(error.response.data);
     }
   };
@@ -22,6 +31,7 @@ function Login() {
           span: 24,
         }}
         onFinish={handleLogin}
+        className="form"
       >
         <Form.Item
           label="Username"
@@ -43,6 +53,13 @@ function Login() {
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Login
+          </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={() => nav("/register")}
+          >
+            Register
           </Button>
         </Form.Item>
       </Form>

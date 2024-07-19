@@ -1,9 +1,10 @@
 import React from 'react'
+import FoodList from '../../components/food-list'
 
 function Home() {
   return (
     <div>
-      Home
+      <FoodList/>
     </div>
   )
 }

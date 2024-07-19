@@ -1,4 +1,5 @@
 import { Col, Image, Row } from "antd";
+import "./index.scss"
 
 type AuthenLayoutProps = {
   //define props
@@ -6,7 +7,7 @@ type AuthenLayoutProps = {
 };
 function AuthenLayout({ children }: AuthenLayoutProps) {
   return (
-    <div>
+    <div className="authen">
       <Row align={"middle"} gutter={13}>
         <Col span={12}>
           <Image src="https://static.kfcvietnam.com.vn/images/web/signin/lg/signin.jpg?v=LW5XYg" />
